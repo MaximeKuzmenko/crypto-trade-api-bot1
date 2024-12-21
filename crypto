@@ -1,0 +1,16 @@
+# api_bot.py
+import requests
+
+API_URL = "https://api.binance.com/api/v3/ticker/price"
+
+def get_token_price(symbol):
+    response = requests.get(f"{API_URL}?symbol={symbol}")
+    if response.status_code == 200:
+        return response.json().get('price')
+    else:
+        return f"Error: {response.status_code}"
+
+if __name__ == "__main__":
+    symbol = "BTCUSDT"
+    price = get_token_price(symbol)
+    print(f"The current price of {symbol} is {price} USD.")
